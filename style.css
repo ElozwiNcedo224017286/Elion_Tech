@@ -52,7 +52,7 @@ img {
   padding: 0 32px;
 }
 
-/* ===== SPLASH SCREEN ===== */
+/* ===== SPLASH SCREEN - EXTRA ZOOMED IN ===== */
 #splash-screen {
   position: fixed;
   top: 0;
@@ -64,34 +64,44 @@ img {
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  transition: opacity 0.8s ease;
+  transition: opacity 0.6s ease;
 }
 
 .splash-content {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.splash-logo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   animation: splashPulse 1.5s ease-in-out infinite;
 }
 
+/* EXTRA ZOOMED IN SPLASH LOGO */
 .splash-logo {
-  width: 300px;
-  height: 300px;
+  width: 550px;
+  height: 550px;
   object-fit: contain;
-  border-radius: 20px;
-  background: #fff;
-  padding: 20px;
-  box-shadow: 0 30px 60px rgba(15,59,44,0.2);
+  display: block;
+  /* No background, no border, no shadow, no padding */
 }
 
-/* Pulse animation for splash logo */
+/* Gentle pulse animation for splash logo */
 @keyframes splashPulse {
   0%, 100% {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.05);
+    transform: scale(1.03);
   }
+}
+
+/* Hide any text in splash screen */
+.splash-content .logo-text {
+  display: none;
 }
 
 /* ===== EYEBROW ===== */
@@ -189,17 +199,15 @@ nav {
   gap: 0;
 }
 
-/* ===== BIG LOGO - ONLY LOGO VISIBLE ===== */
+/* ===== EXTRA ZOOMED IN HEADER LOGO ===== */
 .logo-mark {
-  width: 120px;
-  height: 120px;
+  width: 180px;
+  height: 180px;
   object-fit: contain;
-  border-radius: 12px;
   flex-shrink: 0;
   display: block;
   transition: transform 0.3s ease;
-  background: #fff;
-  padding: 8px;
+  /* No background, no border, no shadow, no padding */
 }
 
 .logo-mark:hover {
@@ -794,16 +802,14 @@ footer {
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-/* Footer logo */
+/* EXTRA ZOOMED IN FOOTER LOGO */
 .footer-logo {
-  width: 120px;
-  height: 120px;
+  width: 180px;
+  height: 180px;
   object-fit: contain;
-  border-radius: 12px;
   flex-shrink: 0;
   display: block;
-  background: #fff;
-  padding: 8px;
+  /* No background, no border, no shadow, no padding */
 }
 
 .footer-brand .logo-text {
@@ -957,25 +963,40 @@ footer {
     display: none;
   }
   
-  /* SPLASH SCREEN MOBILE */
+  /* EXTRA ZOOMED IN SPLASH SCREEN MOBILE */
   .splash-logo {
-    width: 200px;
-    height: 200px;
-    padding: 15px;
+    width: 350px;
+    height: 350px;
   }
   
-  /* HEADER LOGO MOBILE */
+  /* EXTRA ZOOMED IN HEADER LOGO MOBILE */
   .logo-mark {
-    width: 80px;
-    height: 80px;
-    padding: 6px;
+    width: 130px;
+    height: 130px;
   }
   
-  /* FOOTER LOGO MOBILE */
+  /* EXTRA ZOOMED IN FOOTER LOGO MOBILE */
   .footer-logo {
-    width: 80px;
-    height: 80px;
-    padding: 6px;
+    width: 130px;
+    height: 130px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 400px) {
+  .splash-logo {
+    width: 280px;
+    height: 280px;
+  }
+  
+  .logo-mark {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .footer-logo {
+    width: 100px;
+    height: 100px;
   }
 }
 
@@ -987,7 +1008,7 @@ footer {
   #splash-screen {
     animation: none !important;
   }
-  .splash-content {
+  .splash-logo-wrapper {
     animation: none !important;
   }
 }
