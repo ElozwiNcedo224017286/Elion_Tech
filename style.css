@@ -86,7 +86,6 @@ img {
   height: 550px;
   object-fit: contain;
   display: block;
-  /* No background, no border, no shadow, no padding */
 }
 
 /* Gentle pulse animation for splash logo */
@@ -171,23 +170,47 @@ img {
   transform: translateY(-2px);
 }
 
-/* ===== NAV ===== */
+/* ===== NAV - COMPLETELY HIDES ON SCROLL ===== */
 header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(246,241,228,0.86);
+  background: rgba(246,241,228,0.95);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
-  transition: background .3s ease;
+  padding: 8px 0;  /* REDUCED from 16px to 8px */
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Completely hide header when scrolled */
+header.hidden {
+  transform: translateY(-120%);
+  opacity: 0;
+  pointer-events: none;
+  border-bottom: none;
+}
+
+/* Show header when at top */
+header.visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Remove any visible traces */
+header.hidden::after {
+  display: none;
 }
 
 nav {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 16px 32px;
+  padding: 0 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -199,15 +222,14 @@ nav {
   gap: 0;
 }
 
-/* ===== EXTRA ZOOMED IN HEADER LOGO ===== */
+/* ===== SMALLER HEADER LOGO ===== */
 .logo-mark {
-  width: 180px;
-  height: 180px;
+  width: 100px;  /* REDUCED from 180px to 100px */
+  height: 100px; /* REDUCED from 180px to 100px */
   object-fit: contain;
   flex-shrink: 0;
   display: block;
   transition: transform 0.3s ease;
-  /* No background, no border, no shadow, no padding */
 }
 
 .logo-mark:hover {
@@ -222,15 +244,21 @@ nav {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 36px;
+  gap: 30px; /* REDUCED from 36px to 30px */
 }
 
 .nav-links a {
-  font-size: 14.5px;
+  font-size: 14px; /* REDUCED from 14.5px to 14px */
   font-weight: 600;
   color: var(--forest);
   position: relative;
   padding: 4px 0;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+
+.nav-links a:hover {
+  opacity: 1;
 }
 
 .nav-links a::after {
@@ -251,31 +279,39 @@ nav {
 .nav-cta {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px; /* REDUCED from 20px to 16px */
+}
+
+/* Make CTA button smaller */
+.nav-cta .btn {
+  padding: 8px 18px; /* REDUCED from 10px 20px */
+  font-size: 12px; /* REDUCED from 13px to 12px */
+  border-radius: 999px;
 }
 
 .burger {
   display: none;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px; /* REDUCED from 5px to 4px */
   cursor: pointer;
   background: none;
   border: none;
 }
 
 .burger span {
-  width: 24px;
+  width: 22px; /* REDUCED from 24px to 22px */
   height: 2px;
   background: var(--forest);
   display: block;
 }
 
-/* ===== HERO ===== */
+/* ===== HERO - FIXED HEADER OFFSET ===== */
 .hero {
   position: relative;
-  padding: 168px 0 100px;
+  padding: 140px 0 100px;  /* REDUCED from 200px to 140px since header is smaller */
   background: var(--cream);
   overflow: hidden;
+  min-height: 100vh;
 }
 
 .hero-blob {
@@ -809,7 +845,6 @@ footer {
   object-fit: contain;
   flex-shrink: 0;
   display: block;
-  /* No background, no border, no shadow, no padding */
 }
 
 .footer-brand .logo-text {
@@ -946,9 +981,27 @@ footer {
     grid-template-columns: 1fr;
     gap: 36px;
   }
-  .hero {
-    padding: 140px 0 70px;
+  
+  /* SMALLER HEADER ON MOBILE */
+  header {
+    padding: 6px 0;
   }
+  
+  .logo-mark {
+    width: 70px;  /* Even smaller on mobile */
+    height: 70px;
+  }
+  
+  .nav-cta .btn {
+    padding: 6px 14px;
+    font-size: 11px;
+  }
+  
+  .hero {
+    padding: 110px 0 70px;  /* Less padding on mobile */
+    min-height: auto;
+  }
+  
   .hero-stats {
     gap: 24px;
   }
@@ -963,26 +1016,17 @@ footer {
     display: none;
   }
   
-  /* EXTRA ZOOMED IN SPLASH SCREEN MOBILE */
   .splash-logo {
     width: 350px;
     height: 350px;
   }
   
-  /* EXTRA ZOOMED IN HEADER LOGO MOBILE */
-  .logo-mark {
-    width: 130px;
-    height: 130px;
-  }
-  
-  /* EXTRA ZOOMED IN FOOTER LOGO MOBILE */
   .footer-logo {
     width: 130px;
     height: 130px;
   }
 }
 
-/* Extra small devices */
 @media (max-width: 400px) {
   .splash-logo {
     width: 280px;
@@ -990,13 +1034,17 @@ footer {
   }
   
   .logo-mark {
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
   }
   
   .footer-logo {
     width: 100px;
     height: 100px;
+  }
+  
+  .hero {
+    padding: 100px 0 60px;
   }
 }
 
