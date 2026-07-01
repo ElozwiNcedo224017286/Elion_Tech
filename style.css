@@ -180,7 +180,7 @@ header {
   background: rgba(246,241,228,0.95);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
-  padding: 8px 0;  /* REDUCED from 16px to 8px */
+  padding: 8px 0;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translateY(0);
   opacity: 1;
@@ -224,8 +224,8 @@ nav {
 
 /* ===== SMALLER HEADER LOGO ===== */
 .logo-mark {
-  width: 100px;  /* REDUCED from 180px to 100px */
-  height: 100px; /* REDUCED from 180px to 100px */
+  width: 100px;
+  height: 100px;
   object-fit: contain;
   flex-shrink: 0;
   display: block;
@@ -244,11 +244,11 @@ nav {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 30px; /* REDUCED from 36px to 30px */
+  gap: 30px;
 }
 
 .nav-links a {
-  font-size: 14px; /* REDUCED from 14.5px to 14px */
+  font-size: 14px;
   font-weight: 600;
   color: var(--forest);
   position: relative;
@@ -276,30 +276,40 @@ nav {
   width: 100%;
 }
 
+/* Active nav link */
+.nav-links a.active {
+  color: var(--orange);
+  opacity: 1;
+}
+
+.nav-links a.active::after {
+  width: 100%;
+}
+
 .nav-cta {
   display: flex;
   align-items: center;
-  gap: 16px; /* REDUCED from 20px to 16px */
+  gap: 16px;
 }
 
 /* Make CTA button smaller */
 .nav-cta .btn {
-  padding: 8px 18px; /* REDUCED from 10px 20px */
-  font-size: 12px; /* REDUCED from 13px to 12px */
+  padding: 8px 18px;
+  font-size: 12px;
   border-radius: 999px;
 }
 
 .burger {
   display: none;
   flex-direction: column;
-  gap: 4px; /* REDUCED from 5px to 4px */
+  gap: 4px;
   cursor: pointer;
   background: none;
   border: none;
 }
 
 .burger span {
-  width: 22px; /* REDUCED from 24px to 22px */
+  width: 22px;
   height: 2px;
   background: var(--forest);
   display: block;
@@ -308,7 +318,7 @@ nav {
 /* ===== HERO - FIXED HEADER OFFSET ===== */
 .hero {
   position: relative;
-  padding: 140px 0 100px;  /* REDUCED from 200px to 140px since header is smaller */
+  padding: 140px 0 100px;
   background: var(--cream);
   overflow: hidden;
   min-height: 100vh;
@@ -822,7 +832,7 @@ nav {
   min-width: 220px;
 }
 
-/* ===== FOOTER ===== */
+/* ===== FOOTER - FIXED VISIBLE LOGO ===== */
 footer {
   background: var(--forest-deep);
   color: #fff;
@@ -838,21 +848,49 @@ footer {
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-/* EXTRA ZOOMED IN FOOTER LOGO */
+/* Footer brand with visible logo */
+.footer-brand .logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+/* Make footer logo visible on dark background */
 .footer-logo {
-  width: 180px;
-  height: 180px;
+  width: 120px;
+  height: 120px;
   object-fit: contain;
   flex-shrink: 0;
   display: block;
+  /* Makes dark logos white for dark backgrounds */
+  filter: brightness(0) invert(1);
 }
 
+/* If your logo has a white/light background, use this instead: */
+/* .footer-logo {
+  background: #fff;
+  padding: 6px;
+  border-radius: 10px;
+  filter: none;
+} */
+
+/* Show text in footer logo area */
 .footer-brand .logo-text {
-  display: none;
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.footer-brand .logo-text span {
+  color: var(--orange);
 }
 
 .footer-brand p {
-  margin-top: 18px;
+  margin-top: 12px;
   color: rgba(255,255,255,0.6);
   font-size: 14.5px;
   line-height: 1.7;
@@ -874,6 +912,7 @@ footer {
   font-size: 14.5px;
   color: rgba(255,255,255,0.65);
   margin-bottom: 12px;
+  transition: color 0.3s ease;
 }
 
 .footer-col a:hover {
@@ -988,7 +1027,7 @@ footer {
   }
   
   .logo-mark {
-    width: 70px;  /* Even smaller on mobile */
+    width: 70px;
     height: 70px;
   }
   
@@ -998,7 +1037,7 @@ footer {
   }
   
   .hero {
-    padding: 110px 0 70px;  /* Less padding on mobile */
+    padding: 110px 0 70px;
     min-height: auto;
   }
   
@@ -1021,9 +1060,14 @@ footer {
     height: 350px;
   }
   
+  /* FOOTER MOBILE */
   .footer-logo {
-    width: 130px;
-    height: 130px;
+    width: 80px;
+    height: 80px;
+  }
+  
+  .footer-brand .logo-text {
+    font-size: 20px;
   }
 }
 
@@ -1039,8 +1083,12 @@ footer {
   }
   
   .footer-logo {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
+  }
+  
+  .footer-brand .logo-text {
+    font-size: 18px;
   }
   
   .hero {
