@@ -52,6 +52,48 @@ img {
   padding: 0 32px;
 }
 
+/* ===== SPLASH SCREEN ===== */
+#splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.8s ease;
+}
+
+.splash-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: splashPulse 1.5s ease-in-out infinite;
+}
+
+.splash-logo {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+  border-radius: 20px;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 30px 60px rgba(15,59,44,0.2);
+}
+
+/* Pulse animation for splash logo */
+@keyframes splashPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
 /* ===== EYEBROW ===== */
 .eyebrow {
   display: inline-flex;
@@ -144,41 +186,29 @@ nav {
 .logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0;
 }
 
-/* ---- CUSTOM LOGO STYLES ---- */
+/* ===== BIG LOGO - ONLY LOGO VISIBLE ===== */
 .logo-mark {
-  width: 40px;
-  height: 40px;
+  width: 120px;
+  height: 120px;
   object-fit: contain;
-  border-radius: 8px;
+  border-radius: 12px;
   flex-shrink: 0;
   display: block;
-}
-
-/* Fallback if logo is transparent or has white background */
-.logo-mark {
-  background: transparent;
-}
-
-/* Alternative: if your logo has a white background, uncomment below */
-/* .logo-mark {
+  transition: transform 0.3s ease;
   background: #fff;
-  padding: 4px;
-  border-radius: 8px;
-} */
-
-.logo-text {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size: 20px;
-  letter-spacing: 0.02em;
-  color: var(--forest);
+  padding: 8px;
 }
 
-.logo-text span {
-  color: var(--orange);
+.logo-mark:hover {
+  transform: scale(1.05);
+}
+
+/* Hide the text completely */
+.logo-text {
+  display: none;
 }
 
 .nav-links {
@@ -765,13 +795,19 @@ footer {
 }
 
 /* Footer logo */
-.footer-brand .logo .logo-mark {
-  filter: brightness(0) invert(1);
-  /* If your logo is already light, remove the line above */
+.footer-logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 12px;
+  flex-shrink: 0;
+  display: block;
+  background: #fff;
+  padding: 8px;
 }
 
 .footer-brand .logo-text {
-  color: #fff;
+  display: none;
 }
 
 .footer-brand p {
@@ -920,11 +956,38 @@ footer {
   .dot-accent {
     display: none;
   }
+  
+  /* SPLASH SCREEN MOBILE */
+  .splash-logo {
+    width: 200px;
+    height: 200px;
+    padding: 15px;
+  }
+  
+  /* HEADER LOGO MOBILE */
+  .logo-mark {
+    width: 80px;
+    height: 80px;
+    padding: 6px;
+  }
+  
+  /* FOOTER LOGO MOBILE */
+  .footer-logo {
+    width: 80px;
+    height: 80px;
+    padding: 6px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
     scroll-behavior: auto !important;
+  }
+  #splash-screen {
+    animation: none !important;
+  }
+  .splash-content {
+    animation: none !important;
   }
 }

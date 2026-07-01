@@ -10,12 +10,22 @@
 </head>
 <body>
 
+<!-- ===== SPLASH SCREEN ===== -->
+<div id="splash-screen">
+  <div class="splash-content">
+    <div class="splash-logo-wrapper">
+      <img src="my_logo.png" alt="Elion Tech" class="splash-logo" />
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAIN WEBSITE ===== -->
+<div id="main-content" style="display:none;">
+
 <header>
   <nav>
     <a href="#top" class="logo">
-      <!-- custom logo image: replace the SVG with your own PNG -->
-      <img src="my_logo.png" alt="Elion Tech logo" class="logo-mark" style="width:36px; height:36px; object-fit:contain;" />
-      <span class="logo-text">ELION <span>TECH</span></span>
+      <img src="my_logo.png" alt="Elion Tech logo" class="logo-mark" />
     </a>
     <div class="nav-links">
       <a href="#services">Services</a>
@@ -242,9 +252,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="#top" class="logo">
-          <!-- footer logo: same custom image -->
-          <img src="my_logo.png" alt="Elion Tech logo" class="logo-mark" style="width:36px; height:36px; object-fit:contain;" />
-          <span class="logo-text">ELION <span>TECH</span></span>
+          <img src="my_logo.png" alt="Elion Tech logo" class="logo-mark footer-logo" />
         </a>
         <p>We design and develop websites, apps and digital products that help your business grow.</p>
         <div class="social-row" style="margin-top:24px;">
@@ -287,35 +295,66 @@
   </div>
 </footer>
 
+</div> <!-- End main-content -->
+
 <script>
-  // mobile menu
-  const burger = document.querySelector('.burger');
-  const navLinks = document.querySelector('.nav-links');
-  burger.addEventListener('click', () => {
-    const open = navLinks.style.display === 'flex';
-    navLinks.style.display = open ? 'none' : 'flex';
-    navLinks.style.flexDirection = 'column';
-    navLinks.style.position = 'absolute';
-    navLinks.style.top = '64px';
-    navLinks.style.right = '20px';
-    navLinks.style.background = '#F6F1E4';
-    navLinks.style.padding = '20px 28px';
-    navLinks.style.borderRadius = '16px';
-    navLinks.style.boxShadow = '0 20px 40px rgba(15,59,44,0.15)';
-    navLinks.style.gap = '18px';
+  // ===== SPLASH SCREEN =====
+  document.addEventListener('DOMContentLoaded', function() {
+    const splash = document.getElementById('splash-screen');
+    const mainContent = document.getElementById('main-content');
+    
+    // Show splash screen for 3 seconds
+    setTimeout(function() {
+      // Fade out splash
+      splash.style.opacity = '0';
+      splash.style.transition = 'opacity 0.6s ease';
+      
+      // After fade, hide splash and show main content
+      setTimeout(function() {
+        splash.style.display = 'none';
+        mainContent.style.display = 'block';
+        // Trigger scroll reveal for elements
+        revealElements();
+      }, 600);
+    }, 3000); // 3 seconds
   });
 
-  // scroll reveal
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting){
-        entry.target.classList.add('in');
-        io.unobserve(entry.target);
-      }
+  // ===== MOBILE MENU =====
+  const burger = document.querySelector('.burger');
+  const navLinks = document.querySelector('.nav-links');
+  
+  if (burger) {
+    burger.addEventListener('click', () => {
+      const open = navLinks.style.display === 'flex';
+      navLinks.style.display = open ? 'none' : 'flex';
+      navLinks.style.flexDirection = 'column';
+      navLinks.style.position = 'absolute';
+      navLinks.style.top = '64px';
+      navLinks.style.right = '20px';
+      navLinks.style.background = '#F6F1E4';
+      navLinks.style.padding = '20px 28px';
+      navLinks.style.borderRadius = '16px';
+      navLinks.style.boxShadow = '0 20px 40px rgba(15,59,44,0.15)';
+      navLinks.style.gap = '18px';
     });
-  }, { threshold: 0.15 });
-  revealEls.forEach(el => io.observe(el));
+  }
+
+  // ===== SCROLL REVEAL =====
+  function revealElements() {
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  }
+
+  // Initial reveal for elements already visible
+  setTimeout(revealElements, 100);
 </script>
 
 </body>
